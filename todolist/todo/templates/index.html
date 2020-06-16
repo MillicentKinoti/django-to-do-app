@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+
+<div class="container">
+    
+     <center><img src="/static/download.jpeg" alt="todo image" style="padding-top:20px;"></center>
+
+</div>
+
+<div class="container">
+
+<form  method="post" action="/addtask/">
+    {% csrf_token %}
+
+<div class="form group">
+    <label for="todo" style="font-size: 30px;">Todo List</label>
+</div>
+
+<div class="form-group">
+    <input type="text" name="task" class="form-control form-control-lg" placeholder="Enter a task">
+
+</div>
+
+<div class="form-group">
+    <button value="add" class="btn" style="background-color: slateblue; color: white;" name="" >Add Task </button>
+</div>
+</form>
+
+<!--Display the tasks you've entered with their ids-->
+
+<table class="table table-light">
+    <thead>
+<tr>
+    <th>Current tasks</th>
+</tr>
+        </thead>
+        <tbody >
+            {% for mytodo in mytodos%}
+            <tr class="table-info">
+<td>{{mytodo.task}}</td> 
+<td><a href="/deletetask/{{mytodo.id}}/">
+    <button class="btn btn-danger btn-lg"><i class="fa fa-trash"></i></button>
+</a></td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+</table>
+
+{% endblock %}
+</div>
